@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/mo22/express-dev-babel-transcode#readme",
   "peerDependencies": {
-    "babel-core": "^6.18.2",
+    "babel-core": "^6.18.2"
   },
   "dependencies": {
     "express-modify-response": "^1.0.1"
