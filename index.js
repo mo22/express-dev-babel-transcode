@@ -14,6 +14,11 @@ module.exports = function expressDevBabelTranscode(options) {
             return false;
         },
         function(req, res, body) {
+            var opts = {
+                filenameRelative: req.path,
+                sourceRoot: process.cwd(),
+                filename: process.cwd() + '/' + req.path
+            };
             body = body.toString();
             if (res.getHeader('Content-Type').startsWith('text/html')) {
                 var content = undefined;
@@ -39,19 +44,11 @@ module.exports = function expressDevBabelTranscode(options) {
                 parser.end();
                 for (var part of parts) {
                     if (!part.trim().startsWith("'use babel'")) continue;
-                    var result = babel.transform(part, {
-                        filenameRelative: req.path,
-                        sourceRoot: __dirname,
-                        filename: __dirname + '/' + req.path
-                    });
+                    var result = babel.transform(part, opts);
                     body = body.replace(part, result.code);
                 }
             } else if (body.trim().startsWith("'use babel'")) {
-                var result = babel.transform(body, {
-                    filenameRelative: req.path,
-                    sourceRoot: __dirname,
-                    filename: __dirname + '/' + req.path
-                });
+                var result = babel.transform(body, opts);
                 return result.code;
             }
             return body;
