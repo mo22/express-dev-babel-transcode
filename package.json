@@ -1,0 +1,30 @@
+{
+  "name": "express-dev-babel-transcode",
+  "version": "1.0.0",
+  "description": "express plugin that transcodes javascript with babel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mo22/express-dev-babel-transcode.git"
+  },
+  "keywords": [
+    "express",
+    "development",
+    "babel"
+  ],
+  "author": {
+    "name": "Moritz Moeller",
+    "email": "mm@mxs.de"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mo22/express-dev-babel-transcode/issues"
+  },
+  "homepage": "https://github.com/mo22/express-dev-babel-transcode#readme",
+  "dependencies": {
+    "express-modify-response": "^1.0.1"
+  }
+}
