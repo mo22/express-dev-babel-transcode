@@ -45,11 +45,11 @@ module.exports = function expressDevBabelTranscode(options) {
                 for (var part of parts) {
                     if (!part.trim().startsWith("'use babel'")) continue;
                     var result = babel.transform(part, opts);
-                    body = body.replace(part, result.code);
+                    body = body.replace(part, result.code + '\n/* express-dev-babel-transcode */\n');
                 }
             } else if (body.trim().startsWith("'use babel'")) {
                 var result = babel.transform(body, opts);
-                return result.code;
+                return result.code + '\n/* express-dev-babel-transcode */\n';
             }
             return body;
         }
