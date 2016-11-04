@@ -1,6 +1,6 @@
 {
   "name": "express-dev-babel-transcode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "express plugin that transcodes javascript with babel",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "babel-core": "^6.18.2"
   },
   "dependencies": {
-    "express-modify-response": "^1.0.1"
+    "express-modify-response": "^1.0.1",
+    "htmlparser2": "^3.9.2"
   }
 }
