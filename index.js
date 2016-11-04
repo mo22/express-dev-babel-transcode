@@ -1,6 +1,17 @@
 const expressModifyResponse = require('express-modify-response');
 const babel = require('babel-core');
 const htmlparser2 = require('htmlparser2');
+const stripAnsi = require('strip-ansi');
+
+function transcode(source, opts) {
+    try {
+        var result = babel.transform(source, opts);
+        return result.code + '\n/* express-dev-babel-transcode */\n';
+    } catch (e) {
+        console.log(e.stack);
+        return 'console.log('+JSON.stringify(stripAnsi(e.stack))+');'
+    }
+}
 
 module.exports = function expressDevBabelTranscode(options) {
     return expressModifyResponse(
@@ -44,12 +55,10 @@ module.exports = function expressDevBabelTranscode(options) {
                 parser.end();
                 for (var part of parts) {
                     if (!part.trim().startsWith("'use babel'")) continue;
-                    var result = babel.transform(part, opts);
-                    body = body.replace(part, result.code + '\n/* express-dev-babel-transcode */\n');
+                    body = body.replace(part, transcode(part, opts));
                 }
             } else if (body.trim().startsWith("'use babel'")) {
-                var result = babel.transform(body, opts);
-                return result.code + '\n/* express-dev-babel-transcode */\n';
+                return transcode(body, opts);
             }
             return body;
         }
